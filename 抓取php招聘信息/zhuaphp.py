@@ -17,6 +17,8 @@ def get_json(url, page, lang_name):
     request = Request(url=url, data=data, method='POST')
     request.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 6.2; rv:16.0) Gecko/20100101 Firefox/16.0')
     request.add_header('Content-Type', 'application / json;charset = UTF - 8')
+    #拉钩加了防爬机制，必须加入cookie才能爬
+    request.add_header('Cookie', '_gat=1; user_trace_token=20170209172336-6f3b908a-eea9-11e6-a05e-525400f775ce; PRE_UTM=; PRE_HOST=; PRE_SITE=; PRE_LAND=; LGUID=20170209172336-6f3b92ff-eea9-11e6-a05e-525400f775ce; JSESSIONID=0BBCF5B42BA3D916A50AD79DC3CDBD11; _putrc=E1508FA9364724D7; login=true; unick=%E8%B5%B5%E9%B8%BF; showExpriedIndex=1; showExpriedCompanyHome=1; showExpriedMyPublish=1; hasDeliver=0; TG-TRACK-CODE=index_search; SEARCH_ID=c23cac9345f14777af9e4a3d727ea83a; index_location_city=%E6%88%90%E9%83%BD; Hm_lvt_4233e74dff0ae5bd0a3d81c6ccf756e6=1486632215; Hm_lpvt_4233e74dff0ae5bd0a3d81c6ccf756e6=1486632638; _ga=GA1.2.205507885.1486632216; LGSID=20170209172336-6f3b918a-eea9-11e6-a05e-525400f775ce; LGRID=20170209173038-6b0efd01-eeaa-11e6-8f66-5254005c3644')
 
     rs = urlopen(request).read().decode('utf-8')
     print(rs)
@@ -49,7 +51,7 @@ def main():
         info = get_json(url, page, lang_name)
         info_result = info_result + info
         page += 1
-        print("page"+ page)
+        print("page"+ str(page))
         sleep(random.random() * 0.4)
     wb = Workbook()
     ws1 = wb.active
